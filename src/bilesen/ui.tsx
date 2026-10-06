@@ -224,7 +224,7 @@ const s = StyleSheet.create({
   yuzen: {
     position: 'absolute', right: BOSLUK.l, bottom: BOSLUK.l, minWidth: 56, height: 56, borderRadius: 28, paddingHorizontal: BOSLUK.l,
     alignItems: 'center', justifyContent: 'center',
-    shadowColor: '#000', shadowOpacity: 0.2, shadowRadius: 6, shadowOffset: { width: 0, height: 3 }, elevation: 4,
+    boxShadow: '0px 3px 8px rgba(0, 0, 0, 0.2)',
   },
   cip: { borderWidth: 1, borderRadius: YARICAP.tam, paddingHorizontal: BOSLUK.m, alignItems: 'center', justifyContent: 'center' },
   cipSirasi: { flexDirection: 'row', flexWrap: 'wrap', gap: BOSLUK.s },

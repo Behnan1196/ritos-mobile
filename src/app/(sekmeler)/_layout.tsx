@@ -7,7 +7,7 @@ import { AYAR, ayarOku } from '../../veri/depo';
 import { useVeri } from '../../veri/olay';
 
 const simge = (s: string) => ({ focused }: { focused: boolean }) => (
-  <Text style={{ fontSize: 22, opacity: focused ? 1 : 0.55 }}>{s}</Text>
+  <Text style={{ fontSize: 20, lineHeight: 24, opacity: focused ? 1 : 0.55 }}>{s}</Text>
 );
 
 export default function SekmeDuzeni() {
