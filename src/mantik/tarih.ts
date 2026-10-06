@@ -46,14 +46,9 @@ export function gecerliSaat(s: string): boolean {
 /** "9:5" ya da "0930" gibi girişleri "09:30" biçimine getirir; olmazsa null. */
 export function saatDuzelt(s: string): string | null {
   const t = s.trim().replace('.', ':');
-  let m = /^(\d{1,2}):(\d{1,2})$/.exec(t);
-  if (!m) m = /^(\d{1,2})(\d{2})$/.exec(t);
-  if (!m) {
-    const h = /^(\d{1,2})$/.exec(t);
-    if (h) m = [t, h[1]!, '0'] as RegExpExecArray;
-  }
+  const m = /^(\d{1,2}):(\d{1,2})$/.exec(t) ?? /^(\d{1,2})(\d{2})$/.exec(t) ?? /^(\d{1,2})()$/.exec(t);
   if (!m) return null;
-  const sonuc = `${m[1]!.padStart(2, '0')}:${m[2]!.padStart(2, '0')}`;
+  const sonuc = `${m[1]!.padStart(2, '0')}:${(m[2] || '0').padStart(2, '0')}`;
   return gecerliSaat(sonuc) ? sonuc : null;
 }
 
