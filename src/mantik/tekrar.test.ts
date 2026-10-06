@@ -1,4 +1,4 @@
-import { birGunuKalirMi, gorunur, gununKartlari, silmePlani, tekrarTuru, zamanlamaKur } from './tekrar';
+import { birGunuKalirMi, gorunur, gununKartlari, silmePlani, tekrarTuru, zamanlamaKur, zamanlamaOzeti } from './tekrar';
 import { kart } from './test-yardim';
 
 describe('gorunur', () => {
@@ -90,5 +90,13 @@ describe('silmePlani', () => {
     // salı–pazartesi arası yalnız cumartesi: pencere içinde bir cumartesi var
     expect(birGunuKalirMi(kart({ baslangic: '2026-10-06', bitis: '2026-10-12', gunler: [6] }))).toBe(true);
     expect(birGunuKalirMi(kart({ baslangic: '2026-10-06', bitis: '2026-10-08', gunler: [6] }))).toBe(false);
+  });
+});
+
+describe('zamanlamaOzeti', () => {
+  test('türlere göre', () => {
+    expect(zamanlamaOzeti(kart({ baslangic: '2026-10-06', bitis: '2026-10-06' }))).toBe('6 Eki');
+    expect(zamanlamaOzeti(kart({ saatler: ['07:30'] }))).toBe('Her gün · 07:30');
+    expect(zamanlamaOzeti(kart({ gunler: [3, 1], bitis: '2026-12-31' }))).toBe('Pzt, Çar · 31 Ara tarihine kadar');
   });
 });

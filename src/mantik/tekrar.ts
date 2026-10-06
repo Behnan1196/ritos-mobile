@@ -103,3 +103,21 @@ export function birGunuKalirMi(k: Pick<Kart, 'baslangic' | 'bitis' | 'gunler' | 
   }
   return false;
 }
+
+// ———————————————— Özet metni ————————————————
+
+const AY_KISA = ['Oca', 'Şub', 'Mar', 'Nis', 'May', 'Haz', 'Tem', 'Ağu', 'Eyl', 'Eki', 'Kas', 'Ara'];
+const GUN_KISA_ = ['Paz', 'Pzt', 'Sal', 'Çar', 'Per', 'Cum', 'Cmt'];
+const kisaTarih = (t: string) => `${Number(t.slice(8, 10))} ${AY_KISA[Number(t.slice(5, 7)) - 1] ?? ''}`;
+
+/** "Her gün · 07:30", "Pzt, Çar · 31 Ara'ya kadar", "6 Eki" gibi kısa zamanlama özeti. */
+export function zamanlamaOzeti(k: Pick<Kart, 'baslangic' | 'bitis' | 'gunler' | 'saatler'>): string {
+  const tur = tekrarTuru(k);
+  const parcalar: string[] = [];
+  if (tur === 'tek') parcalar.push(kisaTarih(k.baslangic));
+  else if (tur === 'her') parcalar.push('Her gün');
+  else parcalar.push([1, 2, 3, 4, 5, 6, 0].filter((g) => k.gunler!.includes(g)).map((g) => GUN_KISA_[g]).join(', '));
+  if (k.saatler.length) parcalar.push(k.saatler.join(', '));
+  if (tur !== 'tek' && k.bitis !== null) parcalar.push(`${kisaTarih(k.bitis)} tarihine kadar`);
+  return parcalar.join(' · ');
+}
